@@ -1,0 +1,321 @@
+{
+  "intents": {
+    "volume_up": {
+      "keywords": ["ses", "sesi", "yükselt", "artır", "açar"],
+      "patterns": ["ses(i)?.*(yükselt|artır|aç)", "(yükselt|artır).*ses"],
+      "action": "volume_up",
+      "description": "Sesi yükselt"
+    },
+    "volume_down": {
+      "keywords": ["ses", "sesi", "azalt", "düşür", "indir"],
+      "patterns": ["ses(i)?.*(azalt|düşür|indir)", "(azalt|düşür).*ses"],
+      "action": "volume_down",
+      "description": "Sesi azalt"
+    },
+    "mute": {
+      "keywords": ["sessize", "sessiz", "sustur", "kapat"],
+      "patterns": ["sessize.*al", "sessiz.*yap", "sesi.*kapat"],
+      "action": "mute",
+      "description": "Sessize al"
+    },
+    "unmute": {
+      "keywords": ["sessizden", "sessizlik", "çık", "aç"],
+      "patterns": ["sessiz(den|lik).*(çık|kaldır)", "sesi.*aç"],
+      "action": "unmute",
+      "description": "Sessizden çık"
+    },
+    "brightness_up": {
+      "keywords": ["parlaklık", "parlaklığı", "ekran", "artır", "yükselt"],
+      "patterns": ["parlaklı(k|ğı).*(artır|yükselt)", "ekran.*(parlat|aydınlat)"],
+      "action": "brightness_up",
+      "description": "Parlaklığı artır"
+    },
+    "brightness_down": {
+      "keywords": ["parlaklık", "parlaklığı", "ekran", "azalt", "düşür", "karart"],
+      "patterns": ["parlaklı(k|ğı).*(azalt|düşür|karart)", "ekran.*(karart|azalt)"],
+      "action": "brightness_down",
+      "description": "Parlaklığı azalt"
+    },
+    "wifi_on": {
+      "keywords": ["wifi", "wi-fi", "internet", "aç", "bağlan"],
+      "patterns": ["wifi.*aç", "wi-fi.*aç", "interneti.*aç", "wifi.*bağlan"],
+      "action": "wifi_on",
+      "description": "WiFi'yi aç"
+    },
+    "wifi_off": {
+      "keywords": ["wifi", "wi-fi", "internet", "kapat", "kapa", "kes"],
+      "patterns": ["wifi.*kapat", "wi-fi.*kapat", "interneti.*kapat", "wifi.*kes"],
+      "action": "wifi_off",
+      "description": "WiFi'yi kapat"
+    },
+    "bluetooth_on": {
+      "keywords": ["bluetooth", "bluetoothu", "aç", "bağlan"],
+      "patterns": ["bluetooth.*aç", "bluetoothu.*aç", "bluetooth.*bağlan"],
+      "action": "bluetooth_on",
+      "description": "Bluetooth'u aç"
+    },
+    "bluetooth_off": {
+      "keywords": ["bluetooth", "bluetoothu", "kapat", "kapa", "kes"],
+      "patterns": ["bluetooth.*kapat", "bluetoothu.*kapat", "bluetooth.*kes"],
+      "action": "bluetooth_off",
+      "description": "Bluetooth'u kapat"
+    },
+    "open_settings": {
+      "keywords": ["ayarlar", "ayarları", "sistem", "tercihler", "aç"],
+      "patterns": ["ayarla(r|rı).*aç", "sistem.*ayar.*aç", "tercih.*aç"],
+      "action": "open_settings",
+      "description": "Ayarları aç"
+    },
+    "open_browser": {
+      "keywords": ["tarayıcı", "tarayıcıyı", "chrome", "safari", "firefox", "internet", "aç"],
+      "patterns": ["tarayıcı(yı)?.*aç", "(chrome|safari|firefox).*aç", "internet.*aç"],
+      "action": "open_browser",
+      "description": "Tarayıcıyı aç"
+    },
+    "open_file_explorer": {
+      "keywords": ["dosya", "gezgin", "finder", "klasör", "aç"],
+      "patterns": ["dosya.*gezgin.*aç", "finder.*aç", "dosya.*yönetici.*aç"],
+      "action": "open_file_explorer",
+      "description": "Dosya gezginini aç"
+    },
+    "screenshot": {
+      "keywords": ["ekran", "görüntü", "screenshot", "ss", "al", "çek"],
+      "patterns": ["ekran.*görüntü.*al", "screenshot.*al", "ekran.*çek"],
+      "action": "take_screenshot",
+      "description": "Ekran görüntüsü al"
+    },
+    "get_time": {
+      "keywords": ["saat", "kaç", "zaman"],
+      "patterns": ["saat.*kaç", "kaç.*saat", "zaman.*söyle", "saati.*söyle"],
+      "action": "get_time",
+      "description": "Saati söyle"
+    },
+    "get_date": {
+      "keywords": ["tarih", "bugün", "gün"],
+      "patterns": ["tarih.*kaç", "bugün.*kaç", "kaç.*tarih", "tarihi.*söyle"],
+      "action": "get_date",
+      "description": "Tarihi söyle"
+    },
+    "get_battery": {
+      "keywords": ["pil", "batarya", "şarj", "kaç"],
+      "patterns": ["pil.*kaç", "pil.*seviye", "batarya.*kaç", "şarj.*kaç"],
+      "action": "get_battery",
+      "description": "Pil seviyesini söyle"
+    },
+    "play_music": {
+      "keywords": ["müzik", "çal", "oynat", "başlat"],
+      "patterns": ["müzik.*çal", "müzik.*oynat", "çal.*müzik"],
+      "action": "play_music",
+      "description": "Müzik çal"
+    },
+    "pause_music": {
+      "keywords": ["müzik", "durdur", "pause", "duraklat"],
+      "patterns": ["müzik.*durdur", "duraklat", "pause.*yap"],
+      "action": "pause_music",
+      "description": "Müziği duraklat"
+    },
+    "next_track": {
+      "keywords": ["sonraki", "şarkı", "next", "geç"],
+      "patterns": ["sonraki.*şarkı", "şarkı.*geç", "next.*track"],
+      "action": "next_track",
+      "description": "Sonraki şarkı"
+    },
+    "previous_track": {
+      "keywords": ["önceki", "şarkı", "previous", "geri"],
+      "patterns": ["önceki.*şarkı", "şarkı.*geri", "previous.*track"],
+      "action": "previous_track",
+      "description": "Önceki şarkı"
+    },
+    "open_spotify": {
+      "keywords": ["spotify", "aç"],
+      "patterns": ["spotify.*aç"],
+      "action": "open_spotify",
+      "description": "Spotify aç"
+    },
+    "play_spotify_music": {
+      "keywords": ["spotify", "müzik", "çal", "oynat", "klasik", "rock", "pop", "jazz", "chill"],
+      "patterns": ["spotify.*müzik.*çal", "spotifydan.*çal", "spotify.*oynat", ".*müzik.*çal.*spotify"],
+      "action": "play_spotify_music",
+      "description": "Spotify'da müzik çal"
+    },
+    "open_calculator": {
+      "keywords": ["hesap", "makinesi", "calculator", "aç"],
+      "patterns": ["hesap.*makinesi.*aç", "calculator.*aç"],
+      "action": "open_calculator",
+      "description": "Hesap makinesi aç"
+    },
+    "open_notes": {
+      "keywords": ["not", "notlar", "notes", "aç"],
+      "patterns": ["not.*aç", "notlar.*aç", "notes.*aç"],
+      "action": "open_notes",
+      "description": "Notlar uygulamasını aç"
+    },
+    "open_mail": {
+      "keywords": ["mail", "e-posta", "email", "posta", "aç"],
+      "patterns": ["mail.*aç", "e-posta.*aç", "email.*aç"],
+      "action": "open_mail",
+      "description": "Mail uygulamasını aç"
+    },
+    "open_terminal": {
+      "keywords": ["terminal", "komut", "konsol", "aç"],
+      "patterns": ["terminal.*aç", "komut.*satırı.*aç"],
+      "action": "open_terminal",
+      "description": "Terminal aç"
+    },
+    "open_messages": {
+      "keywords": ["mesajlar", "messages", "sms", "aç"],
+      "patterns": ["mesajlar.*aç", "messages.*aç"],
+      "action": "open_messages",
+      "description": "Mesajlar uygulamasını aç"
+    },
+    "search_google": {
+      "keywords": ["google", "ara", "search", "bul", "internette", "arama"],
+      "patterns": ["google.*ara", "googleda.*ara", "internette.*ara", "arama.*yap", ".*ara.*internet"],
+      "action": "search_google",
+      "description": "Google'da ara"
+    },
+    "open_youtube": {
+      "keywords": ["youtube", "video", "aç", "izle", "ara"],
+      "patterns": ["youtube.*aç", "video.*izle", "youtubeda.*ara", "youtube.*video.*ara"],
+      "action": "open_youtube",
+      "description": "YouTube aç"
+    },
+    "lock_screen": {
+      "keywords": ["ekran", "kilitle", "lock", "kilit"],
+      "patterns": ["ekranı.*kilitle", "lock.*screen", "kilit.*ekran"],
+      "action": "lock_screen",
+      "description": "Ekranı kilitle"
+    },
+    "sleep_mode": {
+      "keywords": ["uyku", "sleep", "mod", "geç"],
+      "patterns": ["uykuya.*geç", "uyku.*modu", "sleep.*mode"],
+      "action": "sleep_mode",
+      "description": "Uyku moduna geç"
+    },
+    "restart_computer": {
+      "keywords": ["yeniden", "başlat", "restart", "bilgisayar"],
+      "patterns": ["yeniden.*başlat", "restart", "bilgisayarı.*başlat"],
+      "action": "restart_computer",
+      "description": "Bilgisayarı yeniden başlat"
+    },
+    "shutdown_computer": {
+      "keywords": ["kapat", "shutdown", "bilgisayar", "sistemi"],
+      "patterns": ["bilgisayarı.*kapat", "shutdown", "sistemi.*kapat"],
+      "action": "shutdown_computer",
+      "description": "Bilgisayarı kapat"
+    },
+    "show_desktop": {
+      "keywords": ["masaüstü", "göster", "desktop", "show"],
+      "patterns": ["masaüstünü.*göster", "show.*desktop"],
+      "action": "show_desktop",
+      "description": "Masaüstünü göster"
+    },
+    "hide_all_windows": {
+      "keywords": ["tüm", "pencereleri", "gizle", "hide"],
+      "patterns": ["tüm.*pencereleri.*gizle", "hepsini.*gizle"],
+      "action": "hide_all_windows",
+      "description": "Tüm pencereleri gizle"
+    },
+    "open_spotlight": {
+      "keywords": ["spotlight", "ara", "search", "aç"],
+      "patterns": ["spotlight.*aç", "arama.*yap"],
+      "action": "open_spotlight",
+      "description": "Spotlight aç"
+    },
+    "open_mission_control": {
+      "keywords": ["mission", "control", "görev", "kontrol"],
+      "patterns": ["mission.*control.*aç", "görev.*kontrol"],
+      "action": "open_mission_control",
+      "description": "Mission Control aç"
+    },
+    "do_not_disturb": {
+      "keywords": ["rahatsız", "etme", "disturb", "sessiz"],
+      "patterns": ["rahatsız.*etme", "do.*not.*disturb", "bildirim.*kapat"],
+      "action": "do_not_disturb",
+      "description": "Rahatsız Etmeyin modunu aç"
+    },
+    "empty_trash": {
+      "keywords": ["çöp", "kutusu", "boşalt", "trash"],
+      "patterns": ["çöp.*kutusu.*boşalt", "trash.*empty"],
+      "action": "empty_trash",
+      "description": "Çöp kutusunu boşalt"
+    },
+    "get_disk_space": {
+      "keywords": ["disk", "alan", "hafıza", "yer"],
+      "patterns": ["disk.*alan", "boş.*yer", "hafıza.*durumu"],
+      "action": "get_disk_space",
+      "description": "Disk alanını göster"
+    },
+    "get_wifi_info": {
+      "keywords": ["wifi", "internet", "bağlantı", "ağ"],
+      "patterns": ["wifi.*bilgi", "internet.*durumu", "bağlantı.*kontrol"],
+      "action": "get_wifi_info",
+      "description": "WiFi bilgisini göster"
+    },
+    "open_siri": {
+      "keywords": ["siri", "aç", "çağır"],
+      "patterns": ["siri.*aç", "siri.*çağır"],
+      "action": "open_siri",
+      "description": "Siri'yi aç"
+    },
+    "zoom_in": {
+      "keywords": ["yakınlaştır", "zoom", "büyüt"],
+      "patterns": ["yakınlaştır", "zoom.*in", "büyüt"],
+      "action": "zoom_in",
+      "description": "Yakınlaştır"
+    },
+    "zoom_out": {
+      "keywords": ["uzaklaştır", "zoom", "küçült"],
+      "patterns": ["uzaklaştır", "zoom.*out", "küçült"],
+      "action": "zoom_out",
+      "description": "Uzaklaştır"
+    }
+  },
+  "allowed_actions": [
+    "volume_up",
+    "volume_down",
+    "mute",
+    "unmute",
+    "brightness_up",
+    "brightness_down",
+    "wifi_on",
+    "wifi_off",
+    "bluetooth_on",
+    "bluetooth_off",
+    "open_settings",
+    "open_browser",
+    "open_file_explorer",
+    "take_screenshot",
+    "get_time",
+    "get_date",
+    "get_battery",
+    "play_music",
+    "pause_music",
+    "next_track",
+    "previous_track",
+    "open_spotify",
+    "play_spotify_music",
+    "open_calculator",
+    "open_notes",
+    "open_mail",
+    "open_terminal",
+    "open_messages",
+    "search_google",
+    "open_youtube",
+    "lock_screen",
+    "sleep_mode",
+    "restart_computer",
+    "shutdown_computer",
+    "show_desktop",
+    "hide_all_windows",
+    "open_spotlight",
+    "open_mission_control",
+    "do_not_disturb",
+    "empty_trash",
+    "get_disk_space",
+    "get_wifi_info",
+    "open_siri",
+    "zoom_in",
+    "zoom_out"
+  ]
+}
