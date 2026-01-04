@@ -1,528 +1,329 @@
-# 🎙️ Whisper-Powered Voice-to-Action Desktop Assistant
+# Voice-to-Action Desktop Assistant
 
-## AIN4312 Special Topics in Artificial Intelligence Engineering II
+A privacy-focused, offline voice assistant that executes desktop commands using Turkish and English speech. Built for AIN4312 course project.
 
-**A privacy-preserving, multilingual, offline voice assistant for desktop automation**
 
----
+## What This Does
 
-## 📊 Project Overview
+Speak a command in Turkish or English, and the assistant will:
+- Control system settings (volume, brightness, WiFi, Bluetooth)
+- Open applications (browser, file explorer, settings)
+- Take screenshots, search Google/YouTube
+- Control music playback (Spotify, Music app)
+- Get system info (time, battery, disk space)
 
-This project presents a fully offline voice assistant that translates natural speech into safe desktop actions in real time. The system employs:
+**Everything runs locally on your machine** - no internet required (except for downloading models initially).
 
-- **OpenAI Whisper** for robust multilingual speech transcription  
-- **DistilBERT multilingual** for intent recognition and classification  
-- **Synthetic dataset** of 1,200+ command utterances (Turkish + English)  
-- **Safety-first policy layer** with allow-list enforcement  
-- **Cross-platform support** (macOS, Windows, Linux)
+## Quick Start
 
-**100% on-device processing** - No cloud dependencies, protecting user privacy.
-
----
-
-## ✨ Key Features
-
-### 🔒 Privacy & Security
-- ✅ **Offline operation** - All processing happens locally
-- ✅ **Allow-list enforcement** - Only pre-approved commands execute
-- ✅ **Policy validation layer** - Blocks unsafe/ambiguous commands
-- ✅ **No data collection** - Audio never leaves your device
-
-### 🌍 Multilingual Support
-- ✅ **Turkish** - Native support for Turkish commands
-- ✅ **English** - Full English command recognition
-- ✅ **Accent-robust** - Handles various accents and speech patterns
-
-### ⚡ Performance
-- ✅ **< 15ms latency** - Near-instant command classification
-- ✅ **100% test accuracy** - Perfect intent recognition on test set
-- ✅ **Lightweight** - Runs efficiently on standard laptops
-
-### 🖥️ Cross-Platform
-- ✅ **macOS** - Full native support
-- ✅ **Windows** - Volume, apps, screenshots
-- ✅ **Linux** - GNOME/KDE compatible
-
----
-
-## 🎯 Supported Commands
-
-| Intent | Turkish Examples | English Examples |
-|--------|-----------------|------------------|
-| 🔊 Volume Up | "Sesi yükselt", "Ses artır" | "Turn up volume", "Make it louder" |
-| 🔉 Volume Down | "Sesi azalt", "Ses düşür" | "Lower volume", "Make it quieter" |
-| 🔇 Mute | "Sessize al", "Sustur" | "Mute", "Silence" |
-| 🔊 Unmute | "Sessizden çık", "Sesi aç" | "Unmute", "Turn sound on" |
-| 💡 Brightness Up | "Parlaklığı artır", "Ekranı parlat" | "Increase brightness", "Brighten screen" |
-| 🌙 Brightness Down | "Parlaklığı azalt", "Ekranı kıs" | "Decrease brightness", "Dim screen" |
-| 📶 WiFi On | "Wi-Fi'yi aç", "İnterneti aç" | "Turn on Wi-Fi", "Enable wireless" |
-| 📵 WiFi Off | "Wi-Fi'yi kapat", "İnterneti kapat" | "Turn off Wi-Fi", "Disable wireless" |
-| 🔵 Bluetooth On | "Bluetooth'u aç" | "Turn on Bluetooth", "Enable Bluetooth" |
-| ⚫ Bluetooth Off | "Bluetooth'u kapat" | "Turn off Bluetooth", "Disable Bluetooth" |
-| ⚙️ Open Settings | "Ayarları aç", "Sistem ayarları" | "Open settings", "System preferences" |
-| 🌐 Open Browser | "Tarayıcıyı aç", "Chrome'u aç" | "Open browser", "Launch Chrome" |
-| 📁 Open Files | "Dosya gezginini aç", "Finder'ı aç" | "Open file explorer", "Open Finder" |
-| 📸 Screenshot | "Ekran görüntüsü al" | "Take screenshot", "Capture screen" |
-| 📷 Open Camera | "Kamerayı aç" | "Open camera", "Launch camera" |
-
----
-
-## 📈 Performance Metrics
-
-### Intent Classification
-- **Accuracy**: 100% (on training data)
-- **Macro F1-Score**: 1.0000
-- **Test Set Size**: 236 examples
-- **Training Examples**: 1,200+ multilingual commands
-
-### Latency (Text-to-Action Pipeline)
-- **Mean**: 14.3 ms
-- **Median**: 14.3 ms
-- **P95**: 14.8 ms
-- **P99**: 14.9 ms
-- **Target**: ≤700 ms ✅ **PASS**
-
-### Safety & Security
-- **Adversarial Block Rate**: 12.5%
-- **Unsafe Executions**: 0 (on valid commands)
-- **Allow-list Coverage**: 15 intents
-- **False Positive Rate**: <1%
-
-### Model Specifications
-- **ASR Model**: Whisper (base) - 244M parameters
-- **NLU Model**: DistilBERT-multilingual - 134M parameters
-- **Total Size**: ~500 MB (models + dependencies)
-- **Quantization**: INT8 support for faster inference
-
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────┐
-│ Microphone  │
-│   Input     │
-└──────┬──────┘
-       │
-       v
-┌─────────────┐
-│   VAD       │  Energy-based voice activity detection
-│  Detection  │
-└──────┬──────┘
-       │
-       v
-┌─────────────┐
-│   Whisper   │  Multilingual speech-to-text
-│     ASR     │  (Turkish + English support)
-└──────┬──────┘
-       │
-       v
-┌─────────────┐
-│ DistilBERT  │  Intent classification
-│  Classifier │  (15 intent categories)
-└──────┬──────┘
-       │
-       v
-┌─────────────┐
-│   Policy &  │  Safety validation
-│   Safety    │  (Allow-list enforcement)
-└──────┬──────┘
-       │
-       v
-┌─────────────┐
-│  Platform   │  Cross-platform action execution
-│  Executor   │  (macOS / Windows / Linux)
-└──────┬──────┘
-       │
-       v
-┌─────────────┐
-│   User      │  Visual/audio feedback
-│  Feedback   │
-└─────────────┘
-```
-
----
-
-## 🚀 Quick Start
-
-### Installation
+### 1. Install Dependencies
 
 ```bash
-# Clone repository
-cd "Whisper-Powered Voice-to-Action Desktop Assistant"
+# Create virtual environment
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Install dependencies
-bash setup.sh
-
-# Generate synthetic training data (1200+ examples)
-python scripts/generate_synthetic_data.py
-
-# Train DistilBERT model
-python src/train_classifier.py
-
-# Run voice assistant (GUI)
-python src/gui_assistant.py
-
-# OR run CLI version
-python src/main_assistant.py
+# Install packages
+pip install -r requirements.txt
 ```
 
-### System Requirements
-- **OS**: macOS 10.15+, Windows 10+, or Linux (Ubuntu 20.04+)
-- **RAM**: 8 GB minimum (16 GB recommended)
-- **Storage**: 2 GB free space
-- **Microphone**: Any standard USB/built-in microphone
-- **Python**: 3.8 or higher
-
----
-
-## 📦 Project Structure
-
-```
-├── config/
-│   ├── intents.json          # Intent definitions & allowed actions
-│   └── settings.json          # System configuration
-├── data/
-│   └── synthetic_commands.csv # Generated training dataset (1200+ examples)
-├── models/
-│   └── distilbert-intent-classifier/
-│       └── final/             # Trained DistilBERT model
-├── src/
-│   ├── whisper_asr.py         # Whisper ASR wrapper
-│   ├── vad.py                 # Voice activity detection
-│   ├── intent_classifier.py   # DistilBERT intent classifier
-│   ├── policy_manager.py      # Safety & allow-list enforcement
-│   ├── action_executor.py     # macOS-specific executor
-│   ├── cross_platform_executor.py  # Windows/Linux support
-│   ├── train_classifier.py    # Model training script
-│   ├── main_assistant.py      # CLI interface
-│   └── gui_assistant.py       # PyQt5 GUI interface
-├── scripts/
-│   └── generate_synthetic_data.py  # LLM-based data generation
-├── tests/
-│   └── evaluation_suite.py    # Comprehensive testing suite
-├── requirements.txt           # Python dependencies
-├── setup.sh                   # Automated setup script
-└── README.md                  # This file
+**macOS users**: Install PyAudio dependencies first:
+```bash
+brew install portaudio
+pip install pyaudio
 ```
 
----
-
-## 🧪 Testing & Evaluation
-
-### Run Comprehensive Test Suite
+### 2. Run the Application
 
 ```bash
-python tests/evaluation_suite.py
+cd src
+python gui_assistant_v2.py
 ```
 
-**Tests include:**
-- ✅ Intent classification accuracy & F1-score
-- ✅ End-to-end latency measurement
-- ✅ Adversarial robustness (unsafe commands)
-- ✅ Cross-language performance
-- ✅ False positive/negative rates
+**Important**: You must run from the `src/` directory due to local imports.
 
-### Manual Testing
+### 3. Use the Assistant
 
-```bash
-# Test CLI assistant
-python src/main_assistant.py
+1. Click "🎤 Dinlemeye Başla" (Start Listening)
+2. Speak your command clearly
+3. Wait for silence detection or 15 seconds
+4. See the transcription and action execution
 
-# Commands:
-# - Type text commands for testing
-# - Use 'voice' mode for microphone input
-# - Type 'quit' to exit
+---
+
+## How It Works
+
+### Pipeline
+
+```
+Your Voice → Whisper (Speech-to-Text) → Intent Classifier → Action Executor
 ```
 
----
+### Components
 
-## 🔬 Technical Details
+**Whisper ASR** (`whisper_asr.py`)
+- Converts your speech to text
+- Supports Turkish and English
+- Uses OpenAI's Whisper large-v3 model
+- First run will download ~3GB model automatically
 
-### Synthetic Data Generation
+**Intent Classifier V2** (`intent_classifier_v2.py`)
+- Determines what you want to do
+- Uses 3-stage matching:
+  1. **Regex patterns** - Exact phrase matching (95% confidence)
+  2. **Keyword matching** - Finds key words in your command (60-92% confidence)
+  3. **Fuzzy matching** - Handles typos and ASR mistakes (60-75% confidence)
 
-We used prompt engineering with structured templates to generate 1,200+ diverse command variations:
+**Action Executor** (`action_executor.py`)
+- Executes the actual command on your system
+- Uses AppleScript on macOS, PowerShell on Windows
+- 47 different actions supported
 
-- **Turkish**: 600 examples (50%)
-- **English**: 600 examples (50%)
-- **Variation techniques**:
-  - Politeness modifiers ("please", "lütfen")
-  - Temporal markers ("now", "şimdi", "immediately")
-  - Prefix/suffix combinations
-  - Natural language variations
+**Voice Activity Detection** (`vad.py`)
+- Detects when you stop speaking
+- Uses energy-based detection
+- Automatically stops recording after silence
 
-**Example generation**:
-```python
-Base template: "Turn up the volume"
-Variations:
-  - "Can you turn up the volume please"
-  - "Turn up the volume right now"
-  - "Please turn up the volume for me"
-  - "Increase volume immediately"
-  ... (40+ variations per intent)
-```
+### Confidence System
 
-### DistilBERT Fine-Tuning
-
-```python
-Model: distilbert-base-multilingual-cased
-Training:
-  - Epochs: 8
-  - Learning rate: 5e-5
-  - Batch size: 16
-  - Optimizer: AdamW
-  - Early stopping: patience=3
-
-Results:
-  - Training loss: 0.0338
-  - Validation accuracy: 100%
-  - Test accuracy: 100%
-  - F1-score: 1.0000
-```
-
-### Safety Mechanism
-
-```python
-Policy validation:
-1. Check if intent in allowed_actions
-2. Verify confidence >= threshold (0.25)
-3. Validate slot values (if any)
-4. Execute only if all checks pass
-
-Allow-list enforcement:
-  - Default: DENY all
-  - Explicit: ALLOW only listed intents
-  - No dynamic command execution
-```
+- **≥60%**: Executes immediately
+- **40-59%**: Asks for confirmation
+- **<40%**: Rejects and asks you to try again
 
 ---
 
-## 🛡️ Security Considerations
+## Supported Commands
 
-### Threat Model
-- ❌ **Cloud breaches**: Not applicable (offline system)
-- ✅ **Local attacks**: Mitigated by allow-list
-- ✅ **Command injection**: Blocked by policy layer
-- ✅ **Eavesdropping**: No network transmission
+### System Controls
+- "Sesi yükselt" / "Turn up volume"
+- "Sesi azalt" / "Lower volume"
+- "Sessize al" / "Mute"
+- "Parlaklığı artır" / "Increase brightness"
+- "Parlaklığı azalt" / "Decrease brightness"
 
-### Safety Features
-1. **Allow-list enforcement** - Only 15 pre-approved actions
-2. **Confidence thresholds** - Low-confidence commands rejected
-3. **Input sanitization** - All commands validated before execution
-4. **No shell access** - Commands use safe APIs only
-5. **User control** - Push-to-talk prevents accidental activation
+### Network
+- "Wi-Fi'yi aç" / "Turn on WiFi"
+- "Wi-Fi'yi kapat" / "Turn off WiFi"
+- "Bluetooth'u aç" / "Turn on Bluetooth"
+- "Bluetooth'u kapat" / "Turn off Bluetooth"
 
----
+### Applications
+- "Tarayıcıyı aç" / "Open browser"
+- "Ayarları aç" / "Open settings"
+- "Dosya gezginini aç" / "Open file explorer"
+- "Hesap makinesi aç" / "Open calculator"
+- "Terminal aç" / "Open terminal"
 
-## 📚 Dependencies
+### Media & Web
+- "Spotify'dan müzik çal" / "Play music on Spotify"
+- "Google'da ara [konu]" / "Search Google for [topic]"
+- "YouTube'da ara [konu]" / "Search YouTube for [topic]"
 
-### Core Libraries
-```
-openai-whisper>=20230124
-transformers>=4.30.0
-torch>=2.0.0
-PyQt5>=5.15.9
-pyaudio>=0.2.13
-datasets>=2.12.0
-scikit-learn>=1.3.0
-pandas>=2.0.0
-numpy>=1.24.0
-```
+### Utilities
+- "Ekran görüntüsü al" / "Take screenshot"
+- "Saat kaç" / "What time is it"
+- "Pil kaç" / "Battery level"
 
-### Platform-Specific (Optional)
-```
-# Windows
-pycaw>=20230407  # Volume control
-
-# Linux
-python3-gi  # GNOME integration
-```
-
----
-
-## 🔮 Future Enhancements
-
-### Planned Features
-- 🎙️ **Wake word detection** - Hands-free activation ("Hey Assistant")
-- 🗣️ **Text-to-Speech feedback** - Verbal responses
-- 👥 **Multi-user support** - Speaker identification
-- 🏠 **IoT integration** - Smart home control
-- 🌐 **More languages** - Spanish, French, German support
-- 📱 **Mobile version** - Android/iOS apps
-
-### Research Directions
-- **Smaller models** - Distilled Whisper for edge devices
-- **Federated learning** - Privacy-preserving model updates
-- **Active learning** - User-specific adaptation
-- **Adversarial robustness** - Improved safety mechanisms
-
----
-
-## 📄 Academic Report
-
-For detailed methodology, literature review, and evaluation results, see:
-- **Report**: `AIN4312_Project_Report.pdf`
-- **Presentation**: `AIN4312_Presentation.pptx`
-
----
-
-## 🤝 Team
-
-| Name | Role | Contributions |
-|------|------|---------------|
-| Batuhan Arıkan | Project Lead | Whisper integration, safety layer |
-| Reyhan Kırlangıç | ML Engineer | Dataset generation, DistilBERT training |
-| İrem Aslan | Software Engineer | GUI development, action execution |
-| Asra Sarı | QA Engineer | Evaluation, testing, documentation |
-
----
-
-## 📜 License
-
-This project is developed for academic purposes as part of AIN4312 course at [University Name].
-
----
-
-## 🙏 Acknowledgments
-
-- **OpenAI** - Whisper speech recognition model
-- **Hugging Face** - Transformers library and DistilBERT
-- **Mozilla** - Common Voice dataset inspiration
-- **Community** - Open-source contributors
-
----
-
-## 📞 Contact
-
-For questions or issues:
-- 📧 Email: [your-email@university.edu]
-- 🐛 Issues: [GitHub Issues](https://github.com/your-repo/issues)
-
----
-
-**⭐ If you find this project useful, please star the repository!**
-
-# 🎙️ Whisper-Powered Voice-to-Action Desktop Assistant (V2)
-
-## Quick Start (Final – V2)
-
-1) Create virtual environment
-
-    python3 -m venv .venv
-    source .venv/bin/activate
-
-2) Install dependencies
-
-    pip install -r requirements.txt
-
-macOS note (PyAudio):
-
-    brew install portaudio
-    pip install pyaudio
-
-3) Run the application (IMPORTANT)
-
-The application must be executed from the src/ directory due to local imports.
-
-    cd src
-    python gui_assistant_v2.py
-
----
-
-## Project Overview
-
-An offline, on-device voice assistant that transcribes speech using OpenAI Whisper and executes safe, allow-listed desktop actions.
-
-This repository represents the final runnable implementation (V2) of the project.
-Earlier reports and documentation may reference a BERT-based intent classifier; however, V2 uses a rule-based intent detection system as described in V2_RELEASE_NOTES.md.
-
----
-
-## Final Architecture (V2)
-
-Core Components:
-- GUI: src/gui_assistant_v2.py
-- Speech-to-Text: src/whisper_asr.py
-- Intent Detection: src/intent_classifier_v2.py
-- Action Executor: src/action_executor.py
-- Intent & Safety Rules: config/intents.json
-- Model & Audio Settings: config/settings.json
-
-Legacy / Reference Components (Not used in V2):
-- src/intent_classifier.py
-- models/bert-intent-classifier/
-
----
-
-## Supported Voice Commands (V2)
-
-volume_up            → "Sesi artır"  
-volume_down          → "Sesi azalt"  
-mute                 → "Sesi kapat"  
-unmute               → "Sesi aç"  
-brightness_up        → "Parlaklığı artır"  
-brightness_down      → "Parlaklığı azalt"  
-open_settings        → "Ayarları aç"  
-open_browser         → "Tarayıcıyı aç"  
-open_file_explorer   → "Dosya gezginini aç"  
-screenshot           → "Ekran görüntüsü al"
-
-All intent-to-action mappings are defined in config/intents.json.
-
----
-
-## Intent Detection Logic (V2)
-
-V2 uses a transparent three-stage intent detection pipeline:
-
-1. Regex matching (highest confidence)
-2. Keyword matching (medium confidence)
-3. Fuzzy matching (fallback for ASR noise)
-
-Only actions included in the allow-list are executed.
+**See full list**: Check `config/intents.json` for all 47 supported commands.
 
 ---
 
 ## Configuration
 
-Whisper & Audio settings:
-- config/settings.json
-  - Whisper model size (default: large-v3)
-  - Language (default: tr)
-  - Audio and compute parameters
+### Settings (`config/settings.json`)
 
-Intent & Action rules:
-- config/intents.json
-  - Intent definitions
-  - Regex / keyword rules
-  - Allowed actions (security layer)
+```json
+{
+  "whisper": {
+    "model_size": "large-v3",    // Model: tiny, base, small, medium, large-v3
+    "language": "tr",             // Language: tr (Turkish), en (English)
+    "device": "cpu"               // Device: cpu or cuda
+  },
+  "audio": {
+    "sample_rate": 16000,         // Don't change
+    "chunk_size": 1024            // Don't change
+  }
+}
+```
+
+**For faster performance** (lower accuracy):
+- Change `model_size` to `"base"` or `"small"`
+- First-time download will be smaller
+
+### Intents (`config/intents.json`)
+
+Defines all commands with:
+- Keywords for matching
+- Regex patterns
+- Action mappings
+
+**To add a new command**, edit this file and add the corresponding action to `action_executor.py`.
 
 ---
 
-## OS Compatibility
+## Troubleshooting
 
-- Current implementation is macOS-focused
-- Some actions rely on osascript
-- Windows/Linux require OS-specific implementations in action_executor.py
+### "Model not found" or slow first run
+- Whisper downloads models on first use (~3GB for large-v3)
+- Takes 5-10 minutes depending on internet speed
+- Models cached in `~/.cache/whisper/`
+
+### "Microphone not working"
+- **macOS**: Grant microphone permission in System Settings → Privacy & Security
+- **Windows**: Check microphone settings and permissions
+- Test microphone in system settings first
+
+### "Commands not recognized"
+- Speak clearly and wait for the recording to finish
+- Check the transcription shown in the GUI
+- Try speaking louder if audio level is low (<0.01)
+- Add more keywords to `config/intents.json`
+
+### "Import errors" when running
+- Make sure you're in the `src/` directory: `cd src`
+- Virtual environment activated: `source .venv/bin/activate`
+- All dependencies installed: `pip install -r requirements.txt`
+
+### "Actions not executing"
+- **macOS**: Some actions require external tools:
+  - Brightness: Install `brightness` via Homebrew (optional)
+  - Bluetooth: Install `blueutil` via Homebrew (optional)
+- **Windows**: Most actions use built-in PowerShell commands
+- Check the GUI output for specific error messages
+
+### "SSL Certificate Error"
+- If Whisper model download fails, check internet connection
+- Try downloading manually from [Whisper GitHub](https://github.com/openai/whisper)
 
 ---
 
-## Notes
+## Platform Support
 
-- verify.py may reference outdated setup steps; follow this README
-- setup.sh is not used in the final version
-- Whisper models may download on first run
+### macOS (Primary)
+- ✅ All features fully supported
+- Uses AppleScript for system control
+
+### Windows (Partial)
+- ✅ Volume, brightness, WiFi
+- ✅ App launching, screenshots
+- ⚠️ Some features limited (Bluetooth, system info)
+
+### Linux (Experimental)
+- ⚠️ Not tested
+- May work with GNOME/KDE modifications
 
 ---
 
-## Release Notes
+## Project Structure
 
-See V2_RELEASE_NOTES.md for design rationale and V2 changes.
+```
+├── src/
+│   ├── gui_assistant_v2.py       # Main GUI application (START HERE)
+│   ├── whisper_asr.py             # Speech-to-text
+│   ├── intent_classifier_v2.py   # Command understanding
+│   ├── action_executor.py         # Action execution
+│   └── vad.py                     # Voice activity detection
+├── config/
+│   ├── intents.json               # Command definitions
+│   └── settings.json              # System settings
+├── requirements.txt               # Python dependencies
+└── README.md                      # This file
+```
+
+---
+
+## Technical Details
+
+### Why V2 Instead of Machine Learning?
+
+The project initially used a BERT-based classifier (V1) but switched to rule-based matching (V2) for:
+- **Transparency**: See exactly why a command was recognized
+- **Reliability**: No need to train models
+- **Speed**: Instant classification (<15ms)
+- **Simplicity**: Easier to debug and extend
+
+See `V2_RELEASE_NOTES.md` for full explanation.
+
+### Performance
+
+- **Transcription**: ~2-4 seconds (depends on Whisper model size)
+- **Classification**: <15ms
+- **Total latency**: ~2-5 seconds from speech to action
+
+### Privacy & Security
+
+- **100% offline**: No data sent to cloud
+- **No storage**: Audio deleted after processing
+- **Allow-list**: Only 47 pre-approved actions can execute
+- **Safe defaults**: Destructive actions (shutdown, restart) require confirmation
+
+---
+
+## For Developers
+
+### Running Tests
+
+```bash
+python tests/evaluation_suite.py
+```
+
+Tests accuracy, latency, and adversarial robustness.
+
+### Adding New Commands
+
+1. Edit `config/intents.json`:
+```json
+"my_new_intent": {
+  "keywords": ["keyword1", "keyword2"],
+  "patterns": ["regex.*pattern"],
+  "action": "my_action",
+  "description": "Description in Turkish"
+}
+```
+
+2. Add to `allowed_actions` list in same file
+
+3. Implement in `action_executor.py`:
+```python
+def _my_action(self):
+    # Your implementation
+    return "Success message"
+
+# Add to action_map in __init__:
+self.action_map['my_action'] = self._my_action
+```
+
+### Project Dependencies
+
+**Core**:
+- `openai-whisper` - Speech recognition
+- `PyQt5` - GUI framework
+- `torch` - Whisper backend
+- `numpy` - Audio processing
+
+**Optional**:
+- `transformers` - For V1 BERT classifier (not used in V2)
+- `scikit-learn` - Evaluation metrics
 
 ---
 
 ## Course Information
 
-AIN4312 – Special Topics in Artificial Intelligence Engineering II  
-This repository reflects the final executable version of the project.
+**AIN4312** - Special Topics in Artificial Intelligence Engineering II
 
+This is the final executable version (V2) of the course project.
+
+---
+
+## License
+
+Academic project for educational purposes.
+
+---
+
+## Getting Help
+
+1. Check the GUI output for detailed error messages
+2. Review this README's troubleshooting section
+3. Check `V2_RELEASE_NOTES.md` for V2-specific details
+4. Verify all requirements are installed: `pip list`
